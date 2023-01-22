@@ -18,9 +18,32 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r cars}
 
 #install.packages("haven")
+# install.packages("tidyverse")
+# install.packages("dplyr")
+# install.packages("psych")
+# install.packages("DT")
 library(haven)
+library(tidyverse)
+library(dplyr)
+library(psych)
+library(knitr)
+library(DT)
 MPAC_survey_data <- read_sav("C:/Users/smangane/Downloads/MPAC_survey_data.sav")
+include_graphics("SPSS_variableview.png")
 
+MPAC_survey_labels <- c() # a text vector
+
+for (i in 1: ncol(MPAC_survey_data)) {
+  MPAC_survey_labels[i] <- attr(MPAC_survey_data[[i]],"label")
+} # double brackets to query variable labels
+
+`%!in%` <- Negate(`%in%`)
+
+DV_col1 <- which(grepl("GUN_", names(MPAC_survey_data))) # GUN law related columns (step 1)
+
+DV_col1 <- DV_col1[!DV_col1 %in% which(grepl("_REC", names(MPAC_survey_data)))] # removed recoded binary variables (step 2)
+
+MPAC_survey_labels[DV_col1]
 
 #https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view
 ```
