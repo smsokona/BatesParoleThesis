@@ -24,7 +24,7 @@ When you click the **Knit** button a document will be generated that includes bo
 # install.packages("dplyr")
 # install.packages("psych")
 # install.packages("DT")
-install.packages("foreign")
+# install.packages("foreign")
 library(haven)
 library(tidyverse)
 library(dplyr)
