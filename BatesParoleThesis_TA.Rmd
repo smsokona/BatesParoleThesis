@@ -32,8 +32,8 @@ library(psych)
 library(knitr)
 library(DT)
 library(foreign)
-
-MPAC_survey_data <- read.spss("C:/Users/smangane/Downloads/MPAC_survey_data.sav", to.data.frame=TRUE) 
+# if on computer, folder path: C:/Users/smangane/Downloads/MPAC_survey_data.sav
+MPAC_survey_data <- read.spss("/cloud/project/MPAC_survey_data.sav", to.data.frame=TRUE) 
 MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
 
 #https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view
