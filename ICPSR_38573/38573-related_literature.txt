@@ -1,0 +1,17 @@
+Bibliography
+Annual Survey of Jails, 2021
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 38573. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. 
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu 
+
+
+1. Zeng, Zhen, "Jail Inmates in 2021." Statistical Tables. NCJ 304888,
+Washington, DC: Bureau of Justice Statistics, Dec 2022.
+Abstract: https://bjs.ojp.gov/library/publications/jail-inmates-2021-statistical-tables
+Full text PDF: https://bjs.ojp.gov/sites/g/files/xyckuh236/files/media/document/ji21st.pdf

@@ -36,6 +36,26 @@ library(foreign)
 MPAC_survey_data <- read.spss("/cloud/project/MPAC_survey_data.sav", to.data.frame=TRUE) 
 MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
 
+prison_stats <- read.spss("/cloud/project/38555-0001-Data.sav", to.data.frame=TRUE) 
+maine_prison_stats <- prison_stats %>%
+  filter(STATE == "ME")
+co_prison_stats <- prison_stats %>%
+  filter(STATE == "CO")
+MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
+maine_jailsurvey21 <- da38573.0001 %>%
+  filter(STATEFIPS == 23)
+
+
+
+expenditures71 <- read.table("/cloud/project/38555-0001-Data.sav", sep = "\t") 
+
+
+
+
+
+
+MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
+
 #https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view
 ```
 

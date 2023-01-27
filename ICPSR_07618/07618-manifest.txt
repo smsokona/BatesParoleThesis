@@ -1,0 +1,153 @@
+File Manifest for ICPSR 7618
+
+United States Department of Justice. Bureau of Justice Statistics.
+Expenditure and Employment Data for the Criminal Justice System:  CJEE
+Annual Files, 1971-1979   . ICPSR07618-v2. Ann Arbor, MI: Inter-university
+Consortium for Political and Social Research [distributor], 2001-03-26.
+http://doi.org/10.3886/ICPSR07618.v2
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-descriptioncitation.pdf       -       -         -       2014-07-03  -
+
+    07618-related_literature.txt        -       -         -       daily       -
+
+    07618-manifest.txt                  -       -         -       daily       -
+
+
+DS0001 Annual File, 1971
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0001-Codebook.pdf             -       -         -       2001-04-12  8b514437a4f8ab4256565f60e585f73c
+
+    07618-0001-Data.txt                 381     7,224     63      1996-06-04  b0b12388e413b30da0a9ba236132c370
+
+    07618-0001-Setup.sas                -       -         -       1997-03-06  8800983439cc1f5b3654db091b42af97
+
+    07618-0001-Setup.sps                -       -         -       1997-03-06  2fb05ce1cd5698be281ace0a6524b321
+
+
+DS0002 Annual File, 1972
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0002-Codebook.pdf             -       -         -       2001-04-12  73ec7b1e4d8cd8696a51b865865928fe
+
+    07618-0002-Data.txt                 381     8,146     63      1996-06-04  56c1f858e5cfa0a1df6ec1867e5579bf
+
+    07618-0002-Setup.sas                -       -         -       1997-03-06  da07bac2dc1340b4ebfbac6c270219ae
+
+    07618-0002-Setup.sps                -       -         -       1997-03-06  79fa1c9ac2af1c29cd218d3bb7e25c10
+
+
+DS0003 Annual File, 1973
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0003-Codebook.pdf             -       -         -       2001-04-12  32b02be839a0e0811bf146fb350bbad9
+
+    07618-0003-Data.txt                 381     8,420     63      1996-06-04  d5241a9cb1c280a66ed1ec36b58dace1
+
+    07618-0003-Setup.sas                -       -         -       1997-03-06  a0f55f14b05b4920383497f1d0bb57b7
+
+    07618-0003-Setup.sps                -       -         -       1997-03-06  a28801a8d43c5fc4b8e738f42901155f
+
+
+DS0004 Annual File, 1974
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0004-Codebook.pdf             -       -         -       2001-04-12  50310dbc830eaf4373db0468a5fd7891
+
+    07618-0004-Data.txt                 504     8,439     63      1996-06-04  e3aa82102a13bb549ac3a7311faf5574
+
+    07618-0004-Setup.sas                -       -         -       1997-03-06  195399442927812e769d8aac50a57f41
+
+    07618-0004-Setup.sps                -       -         -       1997-03-06  cf340a4c00edc57924822c203bc5d861
+
+
+DS0005 Annual File, 1975
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0005-Codebook.pdf             -       -         -       2001-04-12  97ef362dbd5990bed046e3eb03b777ed
+
+    07618-0005-Data.txt                 504     8,484     77      1996-06-04  b7cf6fdae5110c3c29d0c36763df48d8
+
+    07618-0005-Setup.sas                -       -         -       1997-03-06  2fa8a67491bd821b54422cbf6b4fb024
+
+    07618-0005-Setup.sps                -       -         -       1997-03-06  4c7b1b9b8f4270e64c2797291a83c88c
+
+
+DS0006 Annual File, 1976
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0006-Codebook.pdf             -       -         -       2001-04-12  c624aeea2d7eb9b58cb75f6208bd0948
+
+    07618-0006-Data.txt                 1005    8,217     116     1996-06-04  c13df833e545768cf807cfbd0a0d1da4
+
+    07618-0006-Setup.sas                -       -         -       1997-03-06  f7e25be0a6ea0a882e46269c634dbef3
+
+    07618-0006-Setup.sps                -       -         -       1997-03-06  961bbea454ec9e3eb368929cfa55063a
+
+
+DS0007 Annual File, 1977
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0007-Codebook.pdf             -       -         -       2001-04-12  9242fece3fa541a487fd9ea94cfc628f
+
+    07618-0007-Data.txt                 1156    8,044     133     1996-06-04  525e9032d34f20fc3cb7cff2f7352550
+
+    07618-0007-Setup.sas                -       -         -       1997-03-06  ae5f3ae7bf1aeeab4950d8b3a4cb4465
+
+    07618-0007-Setup.sps                -       -         -       1997-03-06  009b0328be05783f48eba6f10874fd61
+
+
+DS0008 Annual File, 1978
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0008-Codebook.pdf             -       -         -       2001-04-12  f6e34ad7f602ab6f62c92cc03465baf7
+
+    07618-0008-Data.txt                 1207    8,161     141     1996-06-04  c4c4fc9ac88018edb751a7f847bf9971
+
+    07618-0008-Setup.sas                -       -         -       1997-03-06  40bc34932bb019ae738a6e7f00fa846e
+
+    07618-0008-Setup.sps                -       -         -       1997-03-06  c73cc1894de815dfb2b27800c2c70f73
+
+
+DS0009 Annual File, 1979
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    07618-0009-Codebook.pdf             -       -         -       2001-04-12  90997ec1e5559c3b427b0c2c2fddb591
+
+    07618-0009-Data.txt                 2486    10,742    280     1996-06-04  51848f55366113b64c4f3469c7049128
+
+    07618-0009-Setup.sas                -       -         -       1997-03-06  6e3cab43c10c2bc92021c5edb8c9fe1d
+
+    07618-0009-Setup.sps                -       -         -       1997-03-06  c1e3fce558f8981bda0ad75979ba58df
+
+
+Version History
+
+2001-03-26 The codebooks are available as PDF files.  1997-03-07 SAS and
+SPSS data definition statements have been added to this collection.
