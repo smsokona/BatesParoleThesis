@@ -1,0 +1,58 @@
+File Manifest for ICPSR 38573
+
+United States Department of Justice. Office of Justice Programs. Bureau of
+Justice Statistics. Annual Survey of Jails, 2021. ICPSR38573-v2. Ann Arbor,
+MI: Inter-university Consortium for Political and Social Research
+[distributor], 2023-01-12. http://doi.org/10.3886/ICPSR38573.v2
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    38573-descriptioncitation.pdf       -       -         -       2023-01-12  -
+
+    38573-related_literature.txt        -       -         -       daily       -
+
+    38573-manifest.txt                  -       -         -       daily       -
+
+
+DS0001 Public-Use Dataset
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    38573-0001-Codebook.pdf             -       -         -       2023-01-12  b31b4d505a79bd9d5df26c8d02b0d508
+
+    38573-0001-Data.dta                 -       874       234     2022-12-19  7400fe90ac3cd4e38595c2febf4ec831
+
+    38573-0001-Data.rda                 -       874       234     2022-12-19  35f7806e05c35330dd93cb3e2769383b
+
+    38573-0001-Data.sav                 -       874       234     2022-12-19  09a97a25ea0c798d0d1b10e3e076e129
+
+    38573-0001-Data.stc                 -       874       234     2022-12-19  2cde78a7a1d439b6d23eadee65a74bc0
+
+    38573-0001-Data.tsv                 -       874       234     2022-12-19  9f5ee27bb6c2540ce10545f58a6bbe4b
+
+    38573-0001-Data.txt                 1233    874       234     2022-12-19  fd3b6ff262c064c6202778e320e2eebf
+
+    38573-0001-Setup.dct                -       -         -       2022-12-19  6f28876d49707f25cafabd51c9592bf7
+
+    38573-0001-Setup.do                 -       -         -       2022-12-19  8d4fecaaa9f0dffcdc5c26500acf7c29
+
+    38573-0001-Setup.sas                -       -         -       2022-12-19  d6e74da4ede794132b7cef0968a44b25
+
+    38573-0001-Setup.sps                -       -         -       2022-12-19  c78e18de8f9e948e0ff094af74ae9855
+
+    38573-0001-Supplemental_syntax.do   -       -         -       2022-12-19  9f63c9e6e6ddf3271a38e568761710fd
+
+    38573-0001-Supplemental_syntax.sas  -       -         -       2022-12-19  9d866770c388ca44bfc35d527c53db47
+
+
+Version History
+
+2023-01-12 The "Jail Inmates in 2021 - Statistical Tables" report was added
+to the codebook.
