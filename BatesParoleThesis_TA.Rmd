@@ -32,41 +32,87 @@ library(psych)
 library(knitr)
 library(DT)
 library(foreign)
-# if on computer, folder path: C:/Users/smangane/Downloads/MPAC_survey_data.sav
-# if on cloud, folder path: /cloud/project/MPAC_survey_data.sav
-# if on kevins computer, folder path: C:/Users/kevin chen/Downloads/BatesParoleThesis/MPAC_survey_data.sav
+# if on computer, folder path: C:/Users/smangane/Downloads/
+# if on cloud, folder path: /cloud/project/
+# if on kevins computer, folder path: C:/Users/kevin chen/Downloads/BatesParoleThesis/
 MPAC_survey_data <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/MPAC_survey_data.sav", to.data.frame=TRUE) 
 MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
 
-prison_stats <- read.spss("/cloud/project/38555-0001-Data.sav", to.data.frame=TRUE) 
-maine_prison_stats <- prison_stats %>%
+prison_stats71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/38555-0001-Data.sav", to.data.frame=TRUE) 
+
+maine_prison_stats71 <- prison_stats71 %>%
   filter(STATE == "ME")
-co_prison_stats <- prison_stats %>%
+
+co_prison_stats71 <- prison_stats71 %>%
   filter(STATE == "CO")
-MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
+
 maine_jailsurvey21 <- da38573.0001 %>%
   filter(STATEFIPS == 23)
 
 
+expenditures71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures71.sav", to.data.frame=TRUE)
 
-expenditures71 <- read.table("/cloud/project/38555-0001-Data.sav", sep = "\t") 
+expenditures71 %>%
+  filter(expenditures71$V1 == "MAINE")
+
+expenditures72 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures72.sav", to.data.frame=TRUE)
+
+expenditures72 %>%
+  filter(expenditures72$V1 == "MAINE")
 
 
 
+expenditures73 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures73.sav", to.data.frame=TRUE)
+
+expenditures73 %>%
+  filter(expenditures73$V1 == "MAINE")
 
 
+expenditures74 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures74.sav", to.data.frame=TRUE)
 
-MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
+expenditures74 %>%
+  filter(expenditures74$V1 == "MAINE")
 
-#https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view
+
+expenditures75 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures75.sav", to.data.frame=TRUE)
+
+expenditures75 %>%
+  filter(expenditures75$V1 == "MAINE")
+
+expenditures76 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures76.sav", to.data.frame=TRUE)
+
+expenditures76 %>%
+  filter(expenditures76$V1 == "MAINE")
+
+expenditures77 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures77.sav", to.data.frame=TRUE)
+
+expenditures77 %>%
+  filter(expenditures77$V1 == "MAINE")
+
+expenditures78 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures78.sav", to.data.frame=TRUE)
+
+expenditures78 %>%
+  filter(expenditures78$V1 == "MAINE")
+
+expenditures79 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures79.sav", to.data.frame=TRUE)
+
+expenditures79 %>%
+  filter(expenditures79$V19 == "MAINE")
+
+#https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view of spss file
 ```
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r mpac survey, echo=TRUE}
+
+me_names = c("Maine", "maine", "ME")
+
+MPAC_survey_data %>%
+  filter(str_detect(Q13, me_names))
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
