@@ -1,21 +1,20 @@
 ---
-title: "Bates PArole Thesis _ TxtA"
+title: "Bates Parole Thesis"
 author: "Sokona Mangane"
 date: '2023-01-20'
-output: html_document
+output:
+  html_document:
+    code_folding: hide
 ---
 
+# Data Setup
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
+```{r loading packages and datasets}
 
 #ALWAYS PUSH TO MAIN!
 
@@ -35,84 +34,302 @@ library(foreign)
 # if on computer, folder path: C:/Users/smangane/Downloads/
 # if on cloud, folder path: /cloud/project/
 # if on kevins computer, folder path: C:/Users/kevin chen/Downloads/BatesParoleThesis/
-MPAC_survey_data <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/MPAC_survey_data.sav", to.data.frame=TRUE) 
-MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
-
-prison_stats71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/38555-0001-Data.sav", to.data.frame=TRUE) 
-
-maine_prison_stats71 <- prison_stats71 %>%
-  filter(STATE == "ME")
-
-co_prison_stats71 <- prison_stats71 %>%
-  filter(STATE == "CO")
-
-maine_jailsurvey21 <- da38573.0001 %>%
-  filter(STATEFIPS == 23)
 
 
-expenditures71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures71.sav", to.data.frame=TRUE)
+load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/DS0001/38492-0001-Data.rda") #Term Records
+#load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/DS0004/38492-0004-Data.rda") #year-end pop.
 
-expenditures71 %>%
-  filter(expenditures71$V1 == "MAINE")
+ ME_term_records <- da38492.0001 %>%
+  filter(STATE == "(23) Maine") 
 
-expenditures72 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures72.sav", to.data.frame=TRUE)
-
-expenditures72 %>%
-  filter(expenditures72$V1 == "MAINE")
-
-
-
-expenditures73 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures73.sav", to.data.frame=TRUE)
-
-expenditures73 %>%
-  filter(expenditures73$V1 == "MAINE")
-
-
-expenditures74 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures74.sav", to.data.frame=TRUE)
-
-expenditures74 %>%
-  filter(expenditures74$V1 == "MAINE")
-
-
-expenditures75 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures75.sav", to.data.frame=TRUE)
-
-expenditures75 %>%
-  filter(expenditures75$V1 == "MAINE")
-
-expenditures76 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures76.sav", to.data.frame=TRUE)
-
-expenditures76 %>%
-  filter(expenditures76$V1 == "MAINE")
-
-expenditures77 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures77.sav", to.data.frame=TRUE)
-
-expenditures77 %>%
-  filter(expenditures77$V1 == "MAINE")
-
-expenditures78 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures78.sav", to.data.frame=TRUE)
-
-expenditures78 %>%
-  filter(expenditures78$V1 == "MAINE")
-
-expenditures79 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures79.sav", to.data.frame=TRUE)
-
-expenditures79 %>%
-  filter(expenditures79$V19 == "MAINE")
-
-#https://rpubs.com/tiangenglu/import_SPSS_variable_view - use this to import variable view of spss file
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r mpac survey, echo=TRUE}
-
-me_names = c("Maine", "maine", "ME")
-
-MPAC_survey_data %>%
-  filter(str_detect(Q13, me_names))
+ # yr_end_pop <- da38492.0004 %>%
+ #    filter(STATE == "(23) Maine")
+ # 
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r unused datasets, echo=FALSE}
+
+# load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/BatesParoleThesis/ICPSR_38492/DS0002/38492-0002-Data.rda") #Prison Admissions
+# load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/BatesParoleThesis/ICPSR_38492/DS0003/38492-0003-Data.rda") #Prison Releases
+# load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/DS0004/38492-0004-Data.rda") #Year-End Pop.
+# 
+# me_names1 = c("(23) Maine", "Maine", "maine", "ME")
+# 
+# 
+# prison_admissions <- da38492.0002 %>%
+#   filter(STATE == "(23) Maine") 
+# 
+# prison_releases <- da38492.0003 %>%
+#   filter(STATE == "(23) Maine") 
+
+# yr_end_pop <- da38492.0004 %>%
+#    filter(str_detect(STATE, me_names1))
+
+
+# MPAC_survey_data <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/MPAC_survey_data.sav", to.data.frame=TRUE) 
+# MPAC_survey_labels <- as.data.frame(attr(MPAC_survey_data, "variable.labels"))
+# 
+# prison_stats71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/38555-0001-Data.sav", to.data.frame=TRUE) 
+# 
+# maine_prison_stats71 <- prison_stats71 %>%
+#   filter(STATE == "ME")
+
+
+#load("C:/Users/kevin chen/Downloads/BatesParoleThesis/ICPSR_38492/DS0001/38492-0001-Data.rda") #Term Records
+#load("C:/Users/kevin chen/Downloads/BatesParoleThesis/ICPSR_38492/DS0004/38492-0004-Data.rda") #Year-End Pop.
+
+# 
+# expenditures71 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures71.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# 
+# expenditures72 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures72.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# expenditures73 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures73.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# 
+# expenditures74 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures74.sav", to.data.frame=TRUE)%>%
+#   filter(V1 == "MAINE")
+# 
+# 
+# expenditures75 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures75.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# expenditures76 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures76.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# expenditures77 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures77.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# expenditures78 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures78.sav", to.data.frame=TRUE) %>%
+#   filter(V1 == "MAINE")
+# 
+# expenditures79 <- read.spss("C:/Users/kevin chen/Downloads/BatesParoleThesis/expenditures79.sav", to.data.frame=TRUE) %>%
+#   filter(V19 == "MAINE")
+
+
+# yr_end_pop <- da38492.0004 %>%
+  # filter(str_detect(STATE, me_names1))
+
+
+# co_prison_stats71 <- prison_stats71 %>%
+#   filter(STATE == "CO")
+# 
+# maine_jailsurvey21 <- da38573.0001 %>%
+#   filter(STATEFIPS == 23)
+
+
+# ME_term_records <- da38492.0001 %>%
+  # filter(str_detect(STATE, me_names1))
+
+
+```
+
+# Basic Summary Statistics/EDA - National Corrections Reporting Program, 1991-2020: Selected Variables (ICPSR 38492) (ME Term Records)
+
+To see each individual case, I grouped the data frame by ID number, since a person could be released more than once and as a result have more than one record (only available in DS0001). There are 9,694 *distinct* observations of prisoners in the `ME_term_records`. Below is a table of how many times that inmate's record appears in this data set. 77.3% have been admitted more than once and 22.7% have been admitted more than once, as we can see from the distribution above.  
+
+``` {r basic summary statistics}
+
+ ME_term_records %>%
+  count(ABT_INMATE_ID, sort = TRUE) %>%
+  ggplot(aes(n)) + 
+  geom_histogram()
+  
+
+```
+
+Of those 9,694 observations, 367 have been admitted because they violated their parole. Although it can happen more than once, most inmates have returned to prison only once for violating parole. 
+
+``` {r bss1}
+ ME_term_records %>%
+   filter(ADMTYPE == "(2) Parole return/revocation") %>%
+   count(ABT_INMATE_ID, sort = TRUE) %>%
+  head()
+ 
+```
+
+
+## What are the distribution of sentences served in Maine ?
+
+Here, I created a variable to get the exact sentence length by subtracting the release yr from admin year. I created another variable to get the exact maximum sentence length by using the largest value in the range given in the code book. I also created a variable to see if prisoners were getting released way before the max sentence length (certainty of sentences was one of the reasons Maine implemented Parole). I also created a variable including whether that inmate is a repeat offender or not. 22.35% of all inmates are repeat offenders.
+
+
+```{r}
+
+me_analysis <- ME_term_records %>%
+  select(-(8:10)) %>%
+  mutate(exact_time_served = RELEASEYR - ADMITYR, 
+         exact_maxsentlgth = case_when(
+           SENTLGTH == "(0) < 1 year" ~ 1,
+           SENTLGTH == "(1) 1-1.9 years" ~ 1.9,
+           SENTLGTH == "(2) 2-4.9 years" ~ 4.9,
+           SENTLGTH == "(3) 5-9.9 years" ~ 9.9,
+           SENTLGTH == "(4) 10-24.9 years" ~ 24.9)) %>%
+  mutate(released_early = exact_maxsentlgth - exact_time_served)
+
+ro <- me_analysis %>%
+  count(ABT_INMATE_ID, sort = TRUE) %>%
+  mutate(Repeat_Offender = case_when(
+    n > 1 ~ "Yes",
+    TRUE ~ "No"
+  )) 
+
+me_analysis <- me_analysis %>%
+  full_join(ro, by = "ABT_INMATE_ID")  
+
+
+colnames(me_analysis)[19] = "In_Datasetx?"
+
+```  
+
+As we can see the histogram below, most prisoners are serving 2 years or less in prison (71.2%) and not many are serving more than that (15.1%). A time served of 0, indicates that they were released within the same year and served only less than a year sentence (14.8% of inmates). Due to missing values in either the release or admission year, we don't know the prison sentences of about 13.6% of the inmates.
+
+``` {r}  
+me_analysis %>% 
+  ggplot(aes(exact_time_served)) + geom_histogram() 
+
+```
+
+Because it's skewed to the right (highest sentences: 30,35,36,37,40,45,46) I created another logged plot below
+
+``` {r }
+me_analysis %>% 
+  mutate(exact_time_served_log = case_when(
+    exact_time_served != 0 ~ log(exact_time_served),
+    TRUE ~ 0
+  )) %>%
+  ggplot(aes(exact_time_served_log)) + geom_histogram()
+```
+
+There's no data for Maine from 2002 - 2012 in the prison releases dataset. Sidenote, I don't know what to do with respective to time in my analysis... (RPTYEAR = the year data was submitted to NCRP)
+
+
+## What percentage of prisoners are already getting released before the maximum length given and what's the distribtuion of that?
+
+Keep in mind that the maximum sentence lengths were given in a range, so many of these are overestimates. However, I can guess on this graph that many are being released about 2-3 years earlier, which could be due to good time? (factors such as year, whether it's conditional or unconditional release, and offense are also important to consider)
+
+``` {r}
+me_analysis %>%
+  ggplot(aes(released_early)) +
+  geom_histogram()
+
+```
+
+
+## What percentage of prisoners are eligible for good time credits?
+
+According to , prisoners convicted of the following offenses: "murder, any crime listed under sexual assaults; any crime listed under sexual exploitation of minors; a crime against a family or household member that is a crime against the person, kidnapping, criminal restraint and criminal forced labor, violation of a protective order, endangering the welfare of a dependent person or obstructing a report of crime or injury; incest; or incident conduct" are eligible for  only five days of credit per month for good conduct and program participation. Besides that prisoners can earn up to 4 days for good conduct and an extra 5 days per month for participating in programs (that you assigned to!). thus 10.7% of prisoners were eligible for only 5 days of good time credit per month. 
+
+
+Note that there can be way more observation because we had to use the NCRP's general categories which we don't know the criteria for. However, for prisoners convicted of sexual assault or murder (1375 or about 10.9% of our data) who have full credits of 5 days per month throughout a prison sentence, the release date (or the actual time served) is about ~83.5% of the maximum sentence given by a judge. 
+
+Keep in mind that 8% has NA - missing
+
+Formula: (12 * time served) * (5 days per month) = good time credits available in days
+
+```{r violent offenses}
+
+
+df1 <- me_analysis %>%
+  filter(OFFDETAIL == "(01) Murder (including non-negligent manslaughter)" | OFFDETAIL == "(03) Rape/sexual assault") %>%
+  mutate(Good_time_credits = (12 * exact_time_served) * 5,  #the amt of good time credits they have in days
+         gtc_exact_time_served = (( (365 * exact_time_served) - Good_time_credits ) / (365)), # using time served to represent max sentence length, this is the projected sentence length with good time credits in years
+         gtc_exact_maxsentlgth = (( (365 * exact_maxsentlgth) - Good_time_credits ) / (365)))  # using max sent. length range given to represent  max sentence length, this is the projected sentence length with good time credits in years
+
+df1 %>%
+  select(1, 3:4, 6:7, 13:14, 16:21) %>%
+  head()
+
+
+```
+
+
+
+``` {r visualization, echo = FALSE}
+# Thinking about how I would make this a visualization
+# df1 %>%
+#   ggplot(aes(x = , y = exact_time_served)) +
+#   geom_line()
+
+
+
+```
+
+For all other prisoners (89.1% of our data), who have full credits of up to 9 days of good time credits through their prison sentence, the release date (or the actual time served) s about ~70% of the maximum sentence given by a judge
+
+```{r everyone else}
+
+# Formula: (12 * time served) * (9 days per month) = good time credits available in days
+
+
+df2 <- me_analysis %>%
+  filter(OFFDETAIL != "(01) Murder (including non-negligent manslaughter)" & OFFDETAIL != "(03) Rape/sexual assault" | is.na(OFFDETAIL)) %>%
+  mutate(Good_time_credits = (12 * exact_time_served) * 9, #the amt of good time credits they have in days
+         gtc_exact_time_served = (( (365 * exact_time_served) - Good_time_credits ) / (365)), # using time served to represent max sentence length, this is the projected sentence length with good time credits in years
+         gtc_exact_maxsentlgth = (( (365 * exact_maxsentlgth) - Good_time_credits ) / (365)))  # using max sent. length range given to represent  max sentence length, this is the projected sentence length with good time credits in years
+
+
+```
+
+
+
+
+# Basic Summary Statistics/EDA - National Prisoner Statistics, [United States], 1978-2021 (ICPSR 38555)
+
+```{r loading packages and datasets 1}
+
+#VARIABLES OF INTEREST: TOTAL IN CUSTODY, CONDITIONAL RELEASE PROBATIONS, DESIGN CAPACITY, DISCRETIONARY PAROLE (RLCODPF/RLCODPM), FEDERAL OR OTHER STATES' FACILITIES SOLELY TO EASE CROWDING, FEMALE FROM 1991 - 2000 (FACROWDF/FACROWDM),(LFCROWDF/LFCROWDM) LOCAL FACILITIES SOLELY TO EASE PRISON CROWDING, FEMALE (1978-2000), LFCRSTF/LFCRSTF)LOCAL FACILITIES SOLELY TO EASE PRISON CROWDING, FEMALE (PRE-1978), (CAPOPM/ CAPOPF) OPERATIONAL CAPACITY, MALE (1999-CURRENT),
+ 
+library(skimr)
+me_prison_stats71 <- read.spss("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/38555-0001-Data.sav", to.data.frame=TRUE) %>%
+   filter(STATE == "ME")
+
+```
+
+
+
+```{r}
+
+
+me_prison_stats71 %>%
+  ggplot() + geom_line(aes(x = me_prison_stats71$YEAR, y = as.numeric(levels(me_prison_stats71$PARNEWM))[me_prison_stats71$PARNEWM], col = "red")) + geom_line(aes(x = me_prison_stats71$YEAR, y = as.numeric(levels(me_prison_stats71$PARNEWF))[me_prison_stats71$PARNEWF], col = "blue")) + labs(x = "Year", y = "Parole Violators with a New Sentence", title = "The change in Parole Violators with a new sentence from 1978 to 2021", col = "Gender (B = M and R = F)")
+
+
+```
+
+```{r}
+# col 143 - rated capacity, Male, CAPRATEM
+# col 11 - total under custody, males (1983-current) + col 12 (females), CUSTOTM + CUSTOTF
+# have to filter for 1999 bc capacity doesn't have data until then
+
+me_prison_stats71 %>%
+  filter(YEAR >= 1999) %>%
+  mutate(TUC = as.numeric(levels(CUSTOTM))[CUSTOTM] + as.numeric(levels(CUSTOTF))[CUSTOTM], TRC = as.numeric(levels(CAPRATEM))[CAPRATEM] + as.numeric(levels(CAPRATEF))[CAPRATEF]) %>%
+  ggplot() + geom_line(aes(x = YEAR, y = TRC, col = "red")) + geom_line(aes(x = YEAR, y = TUC, col = "blue")) + labs(x = "Year", y = "Rated Capacity and Total Custody Over Time", title = "The change in Prison Capacity from 1999 to 2021")
+
+
+
+```
+
+
+
+# Basic Summary Statistics/EDA - Annual Survey of Jails, 2021 (ICPSR 38573)
+
+```{r loading packages and datasets 2, echo=FALSE}
+ 
+#VAROABLES OF INTEREST: COMMUNTIY SERVICE? EXPEDITED RELEASE DUE TO COVID-19, JAIL JURIDISTICTION ID (JURISID), INMATES IN ALTERNATIVE WORK PROGRAMS?, PAROLE VIOLATORS, TOTAL - ADP ( Between July 1, 2020, and June 30, 2021, what was the average daily population (or typical single day count) of all jail confinement facilities operated by your jail jurisdiction... TOTAL (Sum of items 14a and 14b)?), WEEKEND PROGRAMS? 
+
+# load("C:/Users/kevin chen/OneDrive - bates.edu/Bates Parole Thesis/ICPSR_38573/DS0001/38573-0001-Data.rda")
+# 
+# ME_jail_survey <- da38573.0001 %>%
+#   filter(STATEFIPS == 23)
+
+```
+
+
+
