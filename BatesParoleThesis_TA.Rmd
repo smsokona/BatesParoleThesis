@@ -220,6 +220,50 @@ me_analysis %>%
 
 ```
 
+Here, I use reference @tml1975 to classify the terms. Since there's no way to combine the data frames, but I calculated the average sentence length per crime type. I look at the distribution of each of the classifications given in the dataset, and it aligned with the Maine classifications...
+
+
+```{r}
+
+me_analysis <- me_analysis %>% #classified based on reference @tml1975
+  mutate(class_crime = case_when(
+    SENTLGTH == "(0) < 1 year" ~ "E",
+    SENTLGTH == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(4) 10-24.9 years" ~ "A",
+    SENTLGTH == "(5) >=25 years" ~ "A",  #murder to be exact
+    SENTLGTH == "(6) Life, LWOP, Life plus additional years, Death" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B", #timeserved > maxsentlgth so classified based on time served for simplicity
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(4) >=10 years" ~ "B", #1 obs, time served = 10, not > 10 so class B
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(4) >=10 years" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C"
+  ))  
+
+#for the rest of the values we either don't know the time served or the maximum sentlgth or both so it's NA, can run code below to see 
+# %>% filter(is.na(class_crime)) %>%
+#   count(SENTLGTH, TIMESRVD)
+
+
+
+me_analysis %>%
+  group_by(class_crime, RELEASEYR) %>%
+  summarize(avg_sentlgth = mean(exact_time_served)) %>%
+  ggplot(aes(RELEASEYR, avg_sentlgth, color = class_crime)) +
+  geom_line() + 
+  labs(title = "The Average Sentence Length By Each Crime Class Over Time", x ="Year", y = "Average Sentence Length (Years)")
+
+
+
+
+
+```
+
+
 
 ## What percentage of prisoners are eligible for good time credits?
 
@@ -232,7 +276,7 @@ Keep in mind that 8% has NA - missing
 
 Formula: (12 * time served) * (5 days per month) = good time credits available in days
 
-```{r violent offenses}
+```{r violent offenses visualization}
 
 
 df1 <- me_analysis %>%
@@ -241,28 +285,40 @@ df1 <- me_analysis %>%
          gtc_exact_time_served = (( (365 * exact_time_served) - Good_time_credits ) / (365)), # using time served to represent max sentence length, this is the projected sentence length with good time credits in years
          gtc_exact_maxsentlgth = (( (365 * exact_maxsentlgth) - Good_time_credits ) / (365)))  # using max sent. length range given to represent  max sentence length, this is the projected sentence length with good time credits in years
 
-df1 %>%
-  select(1, 3:4, 6:7, 13:14, 16:21) %>%
-  head()
+
+df1 %>% #violent offenders
+  mutate(class_crime = case_when(
+    SENTLGTH == "(0) < 1 year" ~ "E",
+    SENTLGTH == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(4) 10-24.9 years" ~ "A",
+    SENTLGTH == "(5) >=25 years" ~ "A",  #murder to be exact
+    SENTLGTH == "(6) Life, LWOP, Life plus additional years, Death" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B", #timeserved > maxsentlgth so classified based on time served for simplicity
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(4) >=10 years" ~ "B", #1 obs, time served = 10, not > 10 so class B
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(4) >=10 years" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C"
+  )) %>%
+  group_by(class_crime, RELEASEYR) %>%
+  summarize(avg_sentlgth_gtc = mean(gtc_exact_time_served)) %>%
+  ggplot(aes(RELEASEYR, avg_sentlgth_gtc, color = class_crime)) +
+  geom_line() + 
+  labs(title = "The Average Sentence Length w/ Good Time Credits By Each Crime Class Over Time", subtitle = "For Violent Offenders", x = "Year", y = "Average Sentence Length (Years)")
+
 
 
 ```
 
 
-
-``` {r visualization, echo = FALSE}
-# Thinking about how I would make this a visualization
-# df1 %>%
-#   ggplot(aes(x = , y = exact_time_served)) +
-#   geom_line()
-
-
-
-```
 
 For all other prisoners (89.1% of our data), who have full credits of up to 9 days of good time credits through their prison sentence, the release date (or the actual time served) s about ~70% of the maximum sentence given by a judge
 
-```{r everyone else}
+```{r everyone else visualization}
 
 # Formula: (12 * time served) * (9 days per month) = good time credits available in days
 
@@ -273,8 +329,45 @@ df2 <- me_analysis %>%
          gtc_exact_time_served = (( (365 * exact_time_served) - Good_time_credits ) / (365)), # using time served to represent max sentence length, this is the projected sentence length with good time credits in years
          gtc_exact_maxsentlgth = (( (365 * exact_maxsentlgth) - Good_time_credits ) / (365)))  # using max sent. length range given to represent  max sentence length, this is the projected sentence length with good time credits in years
 
+df2 %>% #everyone else
+  mutate(class_crime = case_when(
+    SENTLGTH == "(0) < 1 year" ~ "E",
+    SENTLGTH == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(4) 10-24.9 years" ~ "A",
+    SENTLGTH == "(5) >=25 years" ~ "A",  #murder to be exact
+    SENTLGTH == "(6) Life, LWOP, Life plus additional years, Death" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B", #timeserved > maxsentlgth so classified based on time served for simplicity
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(3) 5-9.9 years" ~ "B",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(4) >=10 years" ~ "B", #1 obs, time served = 10, not > 10 so class B
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(4) >=10 years" ~ "A",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(0) < 1 year" ~ "D/E",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(1) 1-1.9 years" ~ "C",
+    SENTLGTH == "(1) 1-1.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C",
+    SENTLGTH == "(2) 2-4.9 years" & TIMESRVD == "(2) 2-4.9 years" ~ "C"
+  )) %>%
+  group_by(class_crime, RELEASEYR) %>%
+  summarize(avg_sentlgth_gtc = mean(gtc_exact_time_served)) %>%
+  ggplot(aes(RELEASEYR, avg_sentlgth_gtc, color = class_crime)) +
+  geom_line() + 
+  labs(title = "The Average Sentence Length w/ Good Time Credits By Each Crime Class Over Time", subtitle = "For Everyone Else Besides Violent Offenders", x = "Year", y = "Average Sentence Length (Years)")
 
 ```
+
+
+TO DO:
+
+1. look at how other studies checked for certainty in Maine, look over how other studies did a cost benefit analysis and what you can do, then
+2. calculate cost per prisoner...
+3. look at the prison lenghts in Maine, classify them by crime and compare
+figure out the "minimum" in Maine
+4.impose vermont and Wyoming model
+5. calculate cost per prisoner 
+6. difference in sentence legnth as well and the certainty 
+
+maybe so an analysis of maine sentence lengths to check for "certainty"  (based on the offense!) and then after imposing wyoming's and Vermont's paorle model, check for any changes in "certainity" of sentences (think about minimum vs. maximum sentences)
+
 
 
 
@@ -330,6 +423,3 @@ me_prison_stats71 %>%
 #   filter(STATEFIPS == 23)
 
 ```
-
-
-
